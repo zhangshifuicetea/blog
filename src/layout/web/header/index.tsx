@@ -1,5 +1,7 @@
 import React from 'react';
 import {Layout, Row, Col} from 'antd';
+import WebHeaderLeft from './left';
+import WebHeaderRight from './right';
 
 const Header = Layout.Header;
 
@@ -12,11 +14,11 @@ export const WebHeader = () => {
         <Header className={'app-header'}>
             <Row>
                 <Col {...responsiveLeft}>
-                    123
+                    <WebHeaderLeft/>
                 </Col>
 
                 <Col {...responsiveRight}>
-                    223
+                    <WebHeaderRight/>
                 </Col>
             </Row>
         </Header>

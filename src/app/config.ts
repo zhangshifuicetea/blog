@@ -26,3 +26,17 @@ export const COLOR_LIST: string[] = [
 export const ARCHIVES_PAGESIZE = 15; // archives pageSize
 export const TAG_PAGESIZE = 15; // tag / category pageSize
 export const HOME_PAGESIZE = 10; // home pageSize
+
+// === sidebar
+export const SIDEBAR = {
+    // avatar: require('@/assets/images/avatar.jpeg'), // 侧边栏头像
+    avatar: '',
+    title: '张师傅', // 标题
+    subTitle: '一个脱离了高级趣味的人', // 子标题
+    // 个人主页
+    homepages: {
+        github: {
+            link: 'https://github.com/zhangshifuicetea',
+        }
+    }
+};
