@@ -3,14 +3,14 @@ import {createSlice} from '@reduxjs/toolkit';
 interface UserSliceState {
     username: string;
     role: number;
-    userId: string;
+    userId: number;
     github: string;
 }
 
 const initialState: UserSliceState = {
     username: '',
     role: 2,
-    userId: '',
+    userId: -1,
     github: '',
 };
 

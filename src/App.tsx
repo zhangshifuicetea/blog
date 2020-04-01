@@ -1,56 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Switch, Route} from 'react-router-dom';
+import WebHeader from './layout/web/header';
+import PageNotFound from './features/404';
+import Home from './features/home';
+import {BackTop, Col, Layout, Row} from 'antd';
+
+// 响应式
+const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
+const contentLayout = { xxl: 20, xl: 19, lg: 19, sm: 24, xs: 24 };
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <Layout className={'app-container'}>
+                <WebHeader/>
+                <Row className={'app-wrapper'}>
+                    <Col {...siderLayout}>
+                        123
+                    </Col>
+
+                    <Col {...contentLayout}>
+                        <div className='app-main'>
+                            <Switch>
+                                <Route exact path={'/'}>
+                                    <Home/>
+                                </Route>
+
+                                <Route path={'*'}>
+                                    <PageNotFound/>
+                                </Route>
+                            </Switch>
+                        </div>
+                    </Col>
+                </Row>
+                <BackTop target={(): any => (document.querySelector('.app-main'))} />
+            </Layout>
+
+        </React.Fragment>
+    );
 }
 
 export default App;
