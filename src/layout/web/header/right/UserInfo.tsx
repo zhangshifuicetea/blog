@@ -10,11 +10,10 @@ export const UserInfo = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
-    const [isLogging, showLogin] = useState(false);
-    const [isRegistering, showRegister] = useState(false);
+    const [authType, setAuthType] = useState('');
+    const [modalOpen, showModal] = useState(false);
     const closeModal = () => {
-      showLogin(false);
-      showRegister(false);
+        showModal(false);
     };
 
     const MenuOverlay = (
@@ -53,21 +52,27 @@ export const UserInfo = () => {
                             type='primary'
                             size='small'
                             style={{marginRight: 20}}
-                            onClick={e => showLogin(true)}>
+                            onClick={(event) => {
+                                setAuthType('login');
+                                showModal(true);
+                            }}>
                             登录
                         </Button>
-                        <Button ghost type='danger' size='small' onClick={e => showRegister(true)}>
+                        <Button ghost type='danger' size='small' onClick={(event) => {
+                            setAuthType('register');
+                            showModal(true);
+                        }}>
                             注册
                         </Button>
                     </>
                 )}
             <Modal
                 width={420}
-                title={isLogging ? '登录' : '注册'}
-                visible={isLogging || isRegistering}
+                title={authType === 'login' ? '登录' : '注册'}
+                visible={modalOpen}
                 onCancel={e => closeModal()}
                 footer={null}>
-                <AuthForm type={isLogging ? 'login' : 'register'} closeModal={() => closeModal()}/>
+                <AuthForm type={authType} closeModal={() => closeModal()}/>
             </Modal>
         </div>
     )
