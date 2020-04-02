@@ -8,13 +8,17 @@ export function apiRegister(data: RegisterData) {
     return service.post<UserInfo>('/register', data);
 }
 
+export function apiGithubLogin(data: {code: string}) {
+    return service.post<UserInfo>('/login', data);
+}
+
 export interface LoginData {
-    name: string;
+    account: string;
     password: string;
 }
 
 export interface RegisterData {
-    name: string;
+    username: string;
     password: string;
     email: string;
 }

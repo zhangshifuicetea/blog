@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {getStorage, removeStorage, saveStorage} from '../../utils/storage';
 import {AppThunk} from '../../app/store';
-import {apiLogin, apiRegister, GithubInfo, LoginData, RegisterData, UserInfo} from '../../api/user';
+import {apiGithubLogin, apiLogin, apiRegister, GithubInfo, LoginData, RegisterData, UserInfo} from '../../api/user';
 import {message} from 'antd';
 
 interface UserSliceState {
@@ -32,7 +32,11 @@ const user = createSlice({
     reducers: {
         login(state, action: PayloadAction<UserInfo>) {
             saveStorage('userInfo', action.payload);
-            state = {...initialState, ...action.payload};
+            state.username = action.payload.username;
+            state.role = action.payload.role;
+            state.userId = action.payload.userId;
+            state.github = action.payload.github;
+            state.token = action.payload.token;
         },
         logout(state) {
             removeStorage('userInfo');
@@ -65,6 +69,18 @@ export const userRegister = (data: RegisterData): AppThunk => {
     return async (dispatch) => {
         try {
             const res = await apiRegister(data);
+            dispatch(login(res.data));
+            message.success('登录成功');
+        } catch (e) {
+            message.error('登录失败');
+        }
+    }
+};
+
+export const userGithubLogin = (data: {code: string}): AppThunk => {
+    return async (dispatch) => {
+        try {
+            const res = await apiGithubLogin(data);
             dispatch(login(res.data));
             message.success('登录成功');
         } catch (e) {

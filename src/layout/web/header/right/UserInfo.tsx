@@ -5,11 +5,13 @@ import {RootState} from '../../../../app/store';
 import {useHistory} from 'react-router-dom';
 import {logout} from '../../../../features/user/userSlice';
 import AuthForm from '../../../../features/user/AuthForm';
+import {withRouter} from 'react-router-dom'
 
 export const UserInfo = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user);
+    const {username, role} = user;
     const [authType, setAuthType] = useState('');
     const [modalOpen, showModal] = useState(false);
     const closeModal = () => {
@@ -18,16 +20,16 @@ export const UserInfo = () => {
 
     const MenuOverlay = (
         <Menu>
-            {user.role === 1 && (
-                <React.Fragment>
-                    <Menu.Item>
-                        <span>导入文章</span>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <span onClick={e => history.push('/admin')}>后台管理</span>
-                    </Menu.Item>
-                </React.Fragment>
-            )}
+            {role === 1 &&
+            <Menu.Item disabled={role !== 1}>
+                <span>导入文章</span>
+            </Menu.Item>
+            }
+            {role === 1 &&
+            <Menu.Item disabled={role !== 1}>
+                <span onClick={e => history.push('/admin')}>后台管理</span>
+            </Menu.Item>
+            }
             <Menu.Item>
                 <span className='user-logout' onClick={e => dispatch(logout())}>
                   退出登录
@@ -38,7 +40,7 @@ export const UserInfo = () => {
 
     return (
         <div className='header-userInfo'>
-            {user.username ? (
+            {username ? (
                     <Dropdown placement='bottomCenter' overlay={MenuOverlay} trigger={['click', 'hover']}>
                         <div style={{height: 55}}>
                             <Avatar src={user.github?.avatar_url}>{user.username}</Avatar>
@@ -78,4 +80,4 @@ export const UserInfo = () => {
     )
 };
 
-export default UserInfo;
+export default withRouter(UserInfo);

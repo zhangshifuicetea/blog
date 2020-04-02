@@ -20,7 +20,6 @@ export const AuthForm = ({type, closeModal}: IProps) => {
 
     useEffect(() => {
         form.resetFields();
-        console.log('reset');
     });
 
     const FormItemLayout = {
@@ -48,10 +47,10 @@ export const AuthForm = ({type, closeModal}: IProps) => {
 
     const onFinish = (values: {[key: string]: string}) => {
         if (type === 'login') {
-            const data: LoginData = {name: values.name, password: values.password};
+            const data: LoginData = {account: values.name, password: values.password};
             dispatch(userLogin(data));
         } else {
-            const data: RegisterData = {name: values.name, password: values.password, email: values.email};
+            const data: RegisterData = {username: values.name, password: values.password, email: values.email};
             dispatch(userRegister(data));
         }
         closeModal();

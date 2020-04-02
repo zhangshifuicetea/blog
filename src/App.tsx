@@ -5,6 +5,7 @@ import WebHeader from './layout/web/header';
 import PageNotFound from './features/404';
 import Home from './features/home';
 import {BackTop, Col, Layout, Row} from 'antd';
+import GithubLog from './features/user/GithubLog';
 
 // 响应式
 const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
@@ -26,7 +27,9 @@ function App() {
                                 <Route exact path={'/'}>
                                     <Home/>
                                 </Route>
-
+                                <Route path={'/github'}>
+                                    <GithubLog/>
+                                </Route>
                                 <Route path={'*'}>
                                     <PageNotFound/>
                                 </Route>
