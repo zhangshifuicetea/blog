@@ -1,26 +1,22 @@
 import React, {ChangeEvent, KeyboardEventHandler, useEffect, useState} from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
 import {Input} from 'antd'
-import {decodeQuery} from '../../../../utils';
 import {SearchOutlined} from '@ant-design/icons';
+import {ArticlesParam} from '../../../../api/article';
+import {useDispatch} from 'react-redux';
+import {fetchArticles} from '../../../../features/article/articleSlice';
 
 export const HeaderSearch = () => {
-    const history = useHistory();
-    const location = useLocation();
-    const [keyword, setKeyword] = useState('');
-
-    useEffect(() => {
-        const { keyword } = decodeQuery(location.search);
-        keyword && setKeyword(keyword);
-    }, [location.search]);
+    const dispatch = useDispatch();
+    const [key, setKeyword] = useState('');
 
     const onSubmit = () => {
-        if (keyword) {
-            history.push(`/?page=1&keyword=${keyword}`);
-        } else {
-            history.push('/');
-        }
+        const data: ArticlesParam = {...(new ArticlesParam()), keyword: key || undefined, page: 1};
+        dispatch(fetchArticles(data));
     };
+
+    useEffect(() => {
+        onSubmit();
+    }, []);
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
@@ -38,7 +34,7 @@ export const HeaderSearch = () => {
 
             <Input
                 type='text'
-                value={keyword}
+                value={key}
                 onChange={onInputChange}
                 onBlur={onSubmit}
                 onPressEnter={onPressEnter}

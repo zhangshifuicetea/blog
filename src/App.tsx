@@ -6,6 +6,7 @@ import PageNotFound from './features/404';
 import Home from './features/home';
 import {BackTop, Col, Layout, Row} from 'antd';
 import GithubLog from './features/user/GithubLog';
+import SideBar from './layout/web/sidebar/SiderBar';
 
 // 响应式
 const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
@@ -18,7 +19,7 @@ function App() {
                 <WebHeader/>
                 <Row className={'app-wrapper'}>
                     <Col {...siderLayout}>
-                        123
+                        <SideBar/>
                     </Col>
 
                     <Col {...contentLayout}>

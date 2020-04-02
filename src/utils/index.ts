@@ -98,12 +98,6 @@ export function debounce(func: Function, wait: number) {
     }
 }
 
-// 生成 color
-/*export function genertorColor(list = [], colorList = COLOR_LIST) {
-    const _list = [...list];
-    _list.forEach((l, i) => {
-        l.color = colorList[i] || colorList[randomIndex(colorList)]
-    });
-    return _list;
-}*/
+export function scrollToTOp() {
 
+}
