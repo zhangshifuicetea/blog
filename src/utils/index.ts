@@ -59,7 +59,7 @@ export const randomIndex = (arr: unknown[]) => Math.floor(Math.random() * arr.le
 /**
  * 对数组进行分组
  */
-export const groupBy = <T>(arr: T[], f: Function) => {
+export const groupBy = <T>(arr: T[], f: (arg: T) => unknown) => {
     const groups: {[key: string]: T[]} = {};
     arr.forEach(item => {
         const group = JSON.stringify(f(item));

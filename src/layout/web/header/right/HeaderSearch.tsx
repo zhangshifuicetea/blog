@@ -4,19 +4,23 @@ import {SearchOutlined} from '@ant-design/icons';
 import {ArticlesParam} from '../../../../api/article';
 import {useDispatch} from 'react-redux';
 import {fetchArticles} from '../../../../features/article/articleSlice';
+import {useHistory } from 'react-router-dom';
+import {HOME_PAGESIZE} from '../../../../app/config';
 
 export const HeaderSearch = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [key, setKeyword] = useState('');
 
     const onSubmit = () => {
-        const data: ArticlesParam = {...(new ArticlesParam()), keyword: key || undefined, page: 1};
+        const data: ArticlesParam = {...(new ArticlesParam()), keyword: key || undefined, page: 1, pageSize: HOME_PAGESIZE};
         dispatch(fetchArticles(data));
+        history.push('/');
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         onSubmit();
-    }, []);
+    }, []);*/
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();

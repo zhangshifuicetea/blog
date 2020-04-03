@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
 import {apiArticles, Article, ArticlesParam} from '../../../api/article';
-import {fetchArticles, fetchCategories, fetchTags} from '../../../features/article/articleSlice';
+import {fetchCategories, fetchTags} from '../../../features/article/articleSlice';
 import {SIDEBAR} from '../../../app/config';
 import {Divider, message, Tag} from 'antd';
 import {Link} from 'react-router-dom';
@@ -16,6 +16,7 @@ export const SideBar = () => {
 
     useEffect(() => {
         dispatch(fetchTags());
+        dispatch(fetchCategories());
     });
 
     useEffect(() => {

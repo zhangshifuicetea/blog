@@ -7,6 +7,8 @@ import Home from './features/home';
 import {BackTop, Col, Layout, Row} from 'antd';
 import GithubLog from './features/user/GithubLog';
 import SideBar from './layout/web/sidebar/SiderBar';
+import Categories from './features/article/Categories';
+import Archives from './features/article/Archives';
 
 // 响应式
 const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
@@ -25,15 +27,11 @@ function App() {
                     <Col {...contentLayout}>
                         <div className='app-main'>
                             <Switch>
-                                <Route exact path={'/'}>
-                                    <Home/>
-                                </Route>
-                                <Route path={'/github'}>
-                                    <GithubLog/>
-                                </Route>
-                                <Route path={'*'}>
-                                    <PageNotFound/>
-                                </Route>
+                                <Route exact path={'/'}><Home/></Route>
+                                <Route path={'/archives'}><Archives/></Route>
+                                <Route path={'/categories'}><Categories/></Route>
+                                <Route path={'/github'}><GithubLog/></Route>
+                                <Route path={'*'}><PageNotFound/></Route>
                             </Switch>
                         </div>
                     </Col>

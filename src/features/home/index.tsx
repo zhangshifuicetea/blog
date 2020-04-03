@@ -1,6 +1,6 @@
 import {Divider, Empty, Drawer, Pagination} from 'antd'
 import {Article, ArticlesParam} from '../../api/article';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useMediaQuery} from 'react-responsive';
 import {useDispatch, useSelector} from 'react-redux';
@@ -10,6 +10,7 @@ import {useHistory} from 'react-router-dom';
 import {MenuOutlined} from '@ant-design/icons';
 import {CommentOutlined, EyeOutlined} from '@ant-design/icons/lib';
 import {fetchArticles} from '../article/articleSlice';
+import {HOME_PAGESIZE} from '../../app/config';
 
 function Preview({list, showTitle = true}: { list: Article[], showTitle: boolean }) {
     return (
@@ -54,11 +55,15 @@ export const Home = () => {
         history.push(`/article/${id}`)
     }
 
-    function changePage(page: number) {
+    function changePage(page: number, p: ArticlesParam) {
         document.querySelector('.app-main')!.scrollTop = 0;
-        const params: ArticlesParam = {...(new ArticlesParam()), page};
+        const params: ArticlesParam = {...p, page, tag: undefined, category: undefined, order: undefined, pageSize: HOME_PAGESIZE};
         dispatch(fetchArticles(params));
     }
+
+    useEffect(() => {
+        changePage(1, params);
+    }, []);
 
     return (
         <div className='app-home'>
@@ -121,7 +126,7 @@ export const Home = () => {
                 </>
             )}
 
-            <Pagination total={count} current={params.page} pageSize={params.pageSize} onChange={page => changePage(page)}/>
+            <Pagination total={count} current={params.page} pageSize={params.pageSize} onChange={page => changePage(page, params)}/>
         </div>
     )
 };
