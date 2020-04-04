@@ -1,5 +1,6 @@
 import service from '../utils/axios-config';
 import {HOME_PAGESIZE} from '../app/config';
+import {UserInfo} from './user';
 
 export function apiArticles(data: ArticlesParam) {
     return service.get<{rows: Article[], count: number}>('/article/list', {params: data});
@@ -11,6 +12,10 @@ export function apiTags() {
 
 export function apiCategories() {
     return service.get<Category[]>('/category/list');
+}
+
+export function apiCreateComment(id: number, content: string, userId: number) {
+    return service.post<Comment[]>('/discuss');
 }
 
 export class ArticlesParam {
@@ -31,6 +36,8 @@ export interface Article {
     createdAt: string;
     updatedAt: string;
     comments: any[];
+    tags: Tag[];
+    categories: Category[];
 }
 
 
@@ -44,4 +51,12 @@ export interface Tag {
     color?: string;
     name: string;
     count: number;
+}
+
+export interface Comment {
+    createdAt: string;
+    id: number;
+    content: string;
+    replies: Comment[];
+    user: UserInfo;
 }

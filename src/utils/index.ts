@@ -1,6 +1,7 @@
 import {getStorage} from './storage';
 import marked from 'marked';
 import xss from 'xss';
+import {Comment} from '../api/article';
 
 // 获取 token
 export function getToken() {
@@ -45,13 +46,13 @@ export const decodeQuery = (url: string) => {
 };
 
 // 计算 评论数
-/*export const calcCommentsCount = commentList => {
+export const calcCommentsCount = (commentList: Comment[]) => {
     let count = commentList.length;
     commentList.forEach(item => {
-        count += item.replies.length
-    })
+        count += item.replies?.length || 0;
+    });
     return count
-}*/
+};
 
 // 取数组中的随机数
 export const randomIndex = (arr: unknown[]) => Math.floor(Math.random() * arr.length);

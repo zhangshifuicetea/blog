@@ -11,6 +11,8 @@ import {MenuOutlined} from '@ant-design/icons';
 import {CommentOutlined, EyeOutlined} from '@ant-design/icons/lib';
 import {fetchArticles} from '../article/articleSlice';
 import {HOME_PAGESIZE} from '../../app/config';
+import './index.scss'
+import ArticleTag from '../common/ArticleTag';
 
 function Preview({list, showTitle = true}: { list: Article[], showTitle: boolean }) {
     return (
@@ -90,7 +92,7 @@ export const Home = () => {
                             <EyeOutlined style={{marginRight: 5}} />
                             <span>{item.viewCount}</span>
 
-                            {/*<ArticleTag tagList={item.tags} categoryList={item.categories}/>*/}
+                            <ArticleTag articleTags={item.tags} articleCategories={item.categories}/>
                         </div>
                     </li>
                 ))}

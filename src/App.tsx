@@ -9,6 +9,9 @@ import GithubLog from './features/user/GithubLog';
 import SideBar from './layout/web/sidebar/SiderBar';
 import Categories from './features/article/Categories';
 import Archives from './features/article/Archives';
+import ArticleList from './features/article/ArticleList';
+import Article from './features/article/Article';
+import About from './features/about/About';
 
 // 响应式
 const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 };
@@ -30,6 +33,11 @@ function App() {
                                 <Route exact path={'/'}><Home/></Route>
                                 <Route path={'/archives'}><Archives/></Route>
                                 <Route path={'/categories'}><Categories/></Route>
+                                <Route path={'/categories/:name'}><ArticleList type={'category'}/></Route>
+                                <Route path={'/tags/:name'}><ArticleList type={'tag'}/></Route>
+                                <Route path={'/categories'}><Categories/></Route>
+                                <Route path={'/article/:id'}><Article/></Route>
+                                <Route path={'/about'}><About/></Route>
                                 <Route path={'/github'}><GithubLog/></Route>
                                 <Route path={'*'}><PageNotFound/></Route>
                             </Switch>
