@@ -1,19 +1,16 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive'
 import {Avatar, Divider} from 'antd';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../app/store';
 import './about.scss';
 import {SIDEBAR} from '../../app/config';
 import {MailOutlined, WechatOutlined} from '@ant-design/icons/lib';
 
 export const About = () => {
     const iphoneScreen = useMediaQuery({ query: '(max-width: 576px)' });
-    const user = useSelector((state: RootState) => state.user);
 
     return (
         <div className='app-about' style={{ paddingRight: iphoneScreen ? 0 : 20 }}>
-            <Avatar src={user.github?.avatar_url}>{user.username}</Avatar>
+            <Avatar src={'images/avatar.jpg'}>张师傅</Avatar>
             <span style={{ paddingLeft: 10, fontStyle: 'italic' }}>{'Nothing is true, everything is permitted'}</span>
             <Divider orientation='left'>博客简述</Divider>
             <p>本博客使用的技术为 Typescript + React Hooks + Redux + antd + koa2 + mysql</p>
