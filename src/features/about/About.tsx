@@ -1,19 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useMediaQuery } from 'react-responsive'
 import {Avatar, Divider} from 'antd';
 import './about.scss';
 import {SIDEBAR} from '../../app/config';
 import {MailOutlined, WechatOutlined} from '@ant-design/icons/lib';
+import service from '../../utils/axios-config';
+import Discuss from '../article/discuss';
+import {Comment} from '../../api/article';
 
 export const About = () => {
     const iphoneScreen = useMediaQuery({ query: '(max-width: 576px)' });
+    const [commentList, setCommentList] = useState<Comment[]>([]);
+
+    useEffect(() => {
+        service.get('/article/-1').then((res) => {
+            setCommentList(res.data.comments);
+        })
+    }, []);
 
     return (
         <div className='app-about' style={{ paddingRight: iphoneScreen ? 0 : 20 }}>
             <Avatar src={'images/avatar.jpg'}>张师傅</Avatar>
             <span style={{ paddingLeft: 10, fontStyle: 'italic' }}>{'Nothing is true, everything is permitted'}</span>
             <Divider orientation='left'>博客简述</Divider>
-            <p>本博客使用的技术为 Typescript + React Hooks + Redux + antd + koa2 + mysql</p>
+            <p>技术栈： TypeScript + React Hooks + Redux + antd + koa2 + mysql</p>
             <p>
                 源码地址：
                 <a href={SIDEBAR.github.link} target={'_blank'} rel={'noreferrer noopener'}>{'Github'}</a>
@@ -48,6 +58,8 @@ export const About = () => {
                     </ul>
                 </li>
             </ul>
+
+            <Discuss comments={commentList} articleId={-1} setComments={setCommentList}/>
         </div>
     )
 };

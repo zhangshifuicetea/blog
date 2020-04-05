@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
 import {Comment} from '../../../api/article';
+import List from './list';
 import {apiCreateComment} from '../../../api/article';
 import {Form, Avatar, Divider, message, Comment as CommentSection, Input, Button} from 'antd';
 import {calcCommentsCount} from '../../../utils';
@@ -24,7 +25,7 @@ export const Discuss = ({comments, articleId, setComments}: IProp) => {
         if (!user.username) return message.warn('没登录哦～');
         setSubmitting(true);
         apiCreateComment(articleId, value, user.userId).then((res) => {
-            setComments(res.data || []);
+            setComments(res.data.rows || []);
             setSubmitting(false);
         }, (error) => {
             setSubmitting(false);
@@ -68,7 +69,7 @@ export const Discuss = ({comments, articleId, setComments}: IProp) => {
                 }
             />
 
-            {/*<List commentList={commentList} articleId={articleId} setCommentList={props.setCommentList} />*/}
+            <List comments={comments} articleId={articleId} userInfo={user} setComments={setComments} />
         </div>
     )
 };

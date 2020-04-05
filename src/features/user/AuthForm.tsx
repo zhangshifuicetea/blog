@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Button, Form, Input} from 'antd';
-import {useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom';
 import {userLogin, userRegister} from './userSlice'
 import {useDispatch} from 'react-redux';
 import {saveStorage} from '../../utils/storage';

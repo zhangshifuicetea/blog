@@ -15,7 +15,13 @@ export function apiCategories() {
 }
 
 export function apiCreateComment(id: number, content: string, userId: number) {
-    return service.post<Comment[]>('/discuss');
+    const data = {articleId: id, content, userId};
+    return service.post<{rows: Comment[]}>('/discuss', data);
+}
+
+export function apiCreateReply(userId: number, articleId: number, commentId: number, content: string) {
+    const data = {articleId, userId, commentId, content};
+    return service.post<{rows: Comment[]}>('/discuss', data);
 }
 
 export class ArticlesParam {

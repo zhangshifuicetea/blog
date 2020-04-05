@@ -17,7 +17,7 @@ export const SideBar = () => {
     useEffect(() => {
         dispatch(fetchTags());
         dispatch(fetchCategories());
-    });
+    }, []);
 
     useEffect(() => {
         const param: ArticlesParam = {
@@ -31,7 +31,7 @@ export const SideBar = () => {
         }).catch((error) => {
             message.error('获取热门文章失败');
         })
-    });
+    }, []);
 
     return (
         <div className='app-sidebar'>
