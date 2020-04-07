@@ -10,6 +10,7 @@ import AdminSidebar from '../../features/admin/sidebar/AdminSidebar';
 import PageNotFound from '../../features/404';
 import ArticleManager from '../../features/admin/manager';
 import ArticleEdit from '../../features/admin/article-edit/ArticleEdit';
+import AdminUsers from '../../features/admin/users';
 
 export const AdminLayout = () => {
     const match = useRouteMatch();
@@ -36,6 +37,7 @@ export const AdminLayout = () => {
                             <Route path={`${match.path}/article/manager`}><ArticleManager/></Route>
                             <Route path={`${match.path}/article/edit/:id`}><ArticleEdit/></Route>
                             <Route path={`${match.path}/article/add`}><ArticleEdit/></Route>
+                            <Route path={`${match.path}/users`}><AdminUsers/></Route>
                             <Route path={'*'}><PageNotFound/></Route>
                         </Switch>
                     </Content>

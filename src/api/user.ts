@@ -29,6 +29,8 @@ export interface UserInfo {
     userId: number,
     github: null | GithubInfo,
     token: string | null,
+    type?: number,
+    createdAt?: string,
 }
 
 export interface GithubInfo {
