@@ -34,10 +34,9 @@ export const WebLayout = () => {
                             <Switch>
                                 <Route exact path={`/`}><Home/></Route>
                                 <Route path={`/archives`}><Archives/></Route>
-                                <Route path={`/categories`}><Categories/></Route>
                                 <Route path={`/categories/:name`}><ArticleList type={'category'}/></Route>
-                                <Route path={`/tags/:name`}><ArticleList type={'tag'}/></Route>
                                 <Route path={`/categories`}><Categories/></Route>
+                                <Route path={`/tags/:name`}><ArticleList type={'tag'}/></Route>
                                 <Route path={`/article/:id`}><Article/></Route>
                                 <Route path={`/about`}><About/></Route>
                                 <Route path={`/github`}><GithubLog/></Route>

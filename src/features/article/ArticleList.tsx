@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import {ArticlesParam} from '../../api/article';
+import {ArticlesParam, newArticleParams} from '../../api/article';
 import {TAG_PAGESIZE} from '../../app/config';
 import {fetchArticles} from './articleSlice';
 import {Link, useParams} from 'react-router-dom';
@@ -20,7 +20,7 @@ export const ArticleList = ({type}: IProp) => {
     function changePage(page: number) {
         document.querySelector('.app-main')!.scrollTop = 0;
         const params: ArticlesParam = {
-            ...(new ArticlesParam()), page, pageSize: TAG_PAGESIZE,
+            ...(newArticleParams()), page, pageSize: TAG_PAGESIZE,
             tag: type === 'tag' ? name : undefined,
             category: type === 'category' ? name : undefined,
         };

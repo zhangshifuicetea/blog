@@ -9,6 +9,8 @@ import {BackTop, Button, Input, message, Modal} from 'antd';
 import SimpleMDE from 'react-simplemde-editor'
 import 'easymde/dist/easymde.min.css'
 import EditorTags from './Tag';
+import { SyncOutlined } from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons/lib';
 
 export const ArticleEdit = () => {
     const [content, setContent] = useState('');
@@ -27,15 +29,10 @@ export const ArticleEdit = () => {
 
     useEffect(() => {
         // did mounted
+        console.log(editId, 'editId')
         if (editId) {
             fetchArticle(+editId)
         } else {
-        }
-    }, []);
-
-    useEffect(() => {
-        // mounted
-        if (!editId) {
             const ts = tags.map(d => d.name).slice(0, 10);
             const cs = categories.map(d => d.name).slice(0, 10);
             setTagList(ts);
@@ -43,7 +40,7 @@ export const ArticleEdit = () => {
             ts[0] && setTagSelectedList([ts[0]]);
             cs[0] && setCateSelectedList([cs[0]]);
         }
-    }, [tags, categories, editId]);
+    }, [editId, tags, categories]);
 
     function fetchArticle(id: number) {
         service.get<Article>(`/article/${id}?type=0`).then(res => {
@@ -142,7 +139,7 @@ export const ArticleEdit = () => {
                 disabled={!title}
                 className='action-icon'
                 title={editId ? '更新' : '新增'}
-                icon={editId ? 'sync' : 'plus'}
+                icon={editId ? <SyncOutlined /> : <PlusOutlined />}
                 onClick={() => {
                     editId ? update() : add()
                 }}

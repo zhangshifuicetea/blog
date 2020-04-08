@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 import {useMediaQuery} from 'react-responsive';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import {translateMarkdown} from '../../utils';
 import {useHistory} from 'react-router-dom';
 import {MenuOutlined} from '@ant-design/icons';
 import {CommentOutlined, EyeOutlined} from '@ant-design/icons/lib';
@@ -43,12 +42,6 @@ export const Home = () => {
     const dispatch = useDispatch();
     const {articles, count, params} = useSelector((state: RootState) => state.article);
 
-    const list = articles.map((item) => {
-        const index = item.content.indexOf('<!--more-->');
-        item.content = translateMarkdown(item.content.slice(0, index));
-        return item;
-    });
-
     const isGreaterThan1300 = useMediaQuery({
         query: '(min-width: 1300px)'
     });
@@ -70,7 +63,7 @@ export const Home = () => {
     return (
         <div className='app-home'>
             <ul className='app-home-list'>
-                {list.map(item => (
+                {articles.map(item => (
                     <li key={item.id} className='app-home-list-item'>
                         <Divider orientation='left'>
                             <span className='title' onClick={() => jumpTo(item.id)}>
@@ -97,10 +90,10 @@ export const Home = () => {
                     </li>
                 ))}
             </ul>
-            {list.length > 0 ? (
+            {articles.length > 0 ? (
                 <>
                     {isGreaterThan1300 ? (
-                        <Preview list={list} showTitle={true}/>
+                        <Preview list={articles} showTitle={true}/>
                     ) : (
                         <>
                             <div className='drawer-btn' onClick={e => setDrawerVisible(true)}>
@@ -113,7 +106,7 @@ export const Home = () => {
                                 onClose={e => setDrawerVisible(false)}
                                 visible={drawerVisible}
                                 getContainer={(): any => document.querySelector('.app-home')}>
-                                <Preview list={list} showTitle={false}/>
+                                <Preview list={articles} showTitle={false}/>
                             </Drawer>
                         </>
                     )}

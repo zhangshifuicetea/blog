@@ -91,7 +91,6 @@ export function RandomId(len: number): string {
 export function debounce(func: Function, wait: number) {
     let timer: any;
     return (...args: any[]) => {
-        console.log(this, 'debounced func this');
         clearTimeout(timer);
         timer = setTimeout(() => {
             func(...args);

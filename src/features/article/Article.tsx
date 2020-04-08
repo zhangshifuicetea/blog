@@ -72,17 +72,17 @@ export const Article = () => {
 
                     <div className='article-desc'>
             <span className='post-time'>
-              <FileOutlined />
+              <FileOutlined/>
                 &nbsp; Posted on &nbsp;
                 <span>{createdAt.slice(0, 10)}</span>
             </span>
                         <ArticleTag articleTags={tags} articleCategories={categories}/>
                         <Divider type='vertical'/>
                         <a className='comment-count' href='#discuss' style={{color: 'inherit'}}>
-                            <CommentOutlined />
+                            <CommentOutlined/>
                             <span style={{marginRight: 5}}> {calcCommentsCount(comments)}</span>
                         </a>
-                        <EyeOutlined style={{marginRight: 2}} />
+                        <EyeOutlined style={{marginRight: 2}}/>
                         <span>{viewCount}</span>
                     </div>
                 </div>

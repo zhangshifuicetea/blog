@@ -8,7 +8,6 @@ import {apiCreateReply, Comment as IComment} from '../../../api/article';
 import {UserInfo} from '../../../api/user';
 import {message, Comment, Popconfirm, Avatar, Tooltip, Input, Button} from 'antd';
 import service from '../../../utils/axios-config';
-import {DeleteOutlined} from '@ant-design/icons/lib';
 import {translateMarkdown} from '../../../utils';
 import moment from 'moment';
 
@@ -52,7 +51,7 @@ const CommentItem = (props: PropsWithChildren<IProp>) => {
     }
 
     // delete discuss
-    function onDelete() {
+    const onDelete = () => {
         if (props.replyId) {
             service.delete(`/discuss/reply/${props.replyId}`).then(() => {
                 const commentList: IComment[] = [...props.comments];
@@ -82,7 +81,7 @@ const CommentItem = (props: PropsWithChildren<IProp>) => {
                 <>
                     {props.userInfo.role === 1 && (
                         <Popconfirm title={'是否删除该留言？'} cancelText='取消' okText='确认' onConfirm={onDelete}>
-                            <DeleteOutlined className='icon-delete'/>
+                            <span className='icon-delete'>Delete</span>
                         </Popconfirm>
                     )}
                 </>

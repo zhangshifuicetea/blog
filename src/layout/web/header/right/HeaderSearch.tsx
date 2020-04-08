@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEventHandler, useEffect, useState} from 'react';
 import {Input} from 'antd'
 import {SearchOutlined} from '@ant-design/icons';
-import {ArticlesParam} from '../../../../api/article';
+import {ArticlesParam, newArticleParams} from '../../../../api/article';
 import {useDispatch} from 'react-redux';
 import {fetchArticles} from '../../../../features/article/articleSlice';
 import {useHistory } from 'react-router-dom';
@@ -13,7 +13,7 @@ export const HeaderSearch = () => {
     const [key, setKeyword] = useState('');
 
     const onSubmit = () => {
-        const data: ArticlesParam = {...(new ArticlesParam()), keyword: key || undefined, page: 1, pageSize: HOME_PAGESIZE};
+        const data: ArticlesParam = {...(newArticleParams()), keyword: key || undefined, page: 1, pageSize: HOME_PAGESIZE};
         dispatch(fetchArticles(data));
         history.push('/');
     };

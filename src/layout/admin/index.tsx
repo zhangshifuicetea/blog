@@ -35,7 +35,7 @@ export const AdminLayout = () => {
                         <Switch>
                             <Route exact path={match.path}><Redirect to={`${match.path}/article/manager`} /></Route>
                             <Route path={`${match.path}/article/manager`}><ArticleManager/></Route>
-                            <Route path={`${match.path}/article/edit/:id`}><ArticleEdit/></Route>
+                            <Route path={`${match.path}/article/edit/:editId`}><ArticleEdit/></Route>
                             <Route path={`${match.path}/article/add`}><ArticleEdit/></Route>
                             <Route path={`${match.path}/users`}><AdminUsers/></Route>
                             <Route path={'*'}><PageNotFound/></Route>

@@ -2,9 +2,13 @@ import React, {ChangeEvent, KeyboardEventHandler, MouseEventHandler, useState} f
 import {Link, useHistory} from 'react-router-dom'
 import {Dropdown, Input, Menu} from 'antd';
 import {HomeOutlined, FolderOutlined, EditOutlined, UserOutlined, SearchOutlined, MenuOutlined} from '@ant-design/icons';
-import {HEADER_BLOG_NAME} from '../../../../app/config';
+import {HEADER_BLOG_NAME, HOME_PAGESIZE} from '../../../../app/config';
+import {ArticlesParam, newArticleParams} from '../../../../api/article';
+import {fetchArticles} from '../../../../features/article/articleSlice';
+import {useDispatch} from 'react-redux';
 
 export const WebHeaderLeft = () => {
+    const dispatch = useDispatch();
     const [keyword, setKeyword] = useState('');
     const history = useHistory();
 
@@ -18,8 +22,9 @@ export const WebHeaderLeft = () => {
     };
 
     const onSubmit = () => {
-        history.push(`/?page=1&keyword=${keyword}`);
-        setKeyword('');
+        const data: ArticlesParam = {...(newArticleParams()), keyword: keyword || undefined, page: 1, pageSize: HOME_PAGESIZE};
+        dispatch(fetchArticles(data));
+        history.push('/');
     };
 
     const search: MouseEventHandler = (e) => {

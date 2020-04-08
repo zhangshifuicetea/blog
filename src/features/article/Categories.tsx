@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
 import {Badge, Tag} from 'antd';
 import {Link} from 'react-router-dom';
+import './category.scss';
 
 export const Categories = () => {
     const {categories} = useSelector((state: RootState) => state.article);

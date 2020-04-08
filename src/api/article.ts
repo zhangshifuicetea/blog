@@ -24,10 +24,14 @@ export function apiCreateReply(userId: number, articleId: number, commentId: num
     return service.post<{rows: Comment[]}>('/discuss', data);
 }
 
-export class ArticlesParam {
+export function newArticleParams() {
+    return <ArticlesParam>({page: 1, pageSize: HOME_PAGESIZE});
+}
+
+export interface ArticlesParam {
     order?: string;
-    page: number = 1;
-    pageSize: number = HOME_PAGESIZE;
+    page: number;
+    pageSize: number;
     keyword?: string;
     category?: string;
     tag?: string;

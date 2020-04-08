@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 import {download} from '../../../utils/download';
 import {Button, Form, Input, message, Popconfirm, Select, Switch, Table, Tag} from 'antd';
-import {Article, ArticlesParam, Category, Tag as ITag} from '../../../api/article';
+import {Article, ArticlesParam, Category, Tag as ITag, newArticleParams} from '../../../api/article';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
 import service from '../../../utils/axios-config';
@@ -11,7 +11,7 @@ import service from '../../../utils/axios-config';
 export const ArticleManager = () => {
 
     const [form] = Form.useForm();
-    const [queryParams, setQueryParams] = useState<ArticlesParam>((new ArticlesParam()));
+    const [queryParams, setQueryParams] = useState<ArticlesParam>((newArticleParams()));
     const [batch, setBatch] = useState<boolean>(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([]);
     const [articles, setArticles] = useState<Article[]>([]);

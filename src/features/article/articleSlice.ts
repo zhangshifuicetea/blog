@@ -1,8 +1,17 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Article, Category, Tag, apiArticles, ArticlesParam, apiTags, apiCategories} from '../../api/article';
+import {
+    Article,
+    Category,
+    Tag,
+    apiArticles,
+    ArticlesParam,
+    apiTags,
+    apiCategories,
+    newArticleParams
+} from '../../api/article';
 import {AppThunk} from '../../app/store';
 import {message} from 'antd';
-import {randomIndex} from '../../utils';
+import {randomIndex, translateMarkdown} from '../../utils';
 
 interface ArticleSliceState {
     categories: Category[];
@@ -12,12 +21,14 @@ interface ArticleSliceState {
     params: ArticlesParam;
 }
 
+const params = newArticleParams();
+
 const initialState: ArticleSliceState = {
     categories: [],
     tags: [],
     articles: [],
     count: 0,
-    params: new ArticlesParam(),
+    params: params,
 };
 
 export interface ArticlePayload {
@@ -33,13 +44,19 @@ const article = createSlice({
         storeArticles(state, action: PayloadAction<ArticlePayload>) {
             state.articles = action.payload.articles || [];
             state.count = action.payload.count || 0;
-            state.params = action.payload.params;
+            state.params = {...action.payload.params};
+            state.articles = state.articles.map((item) => {
+                const index = item.content.indexOf('<!--more-->');
+                item.content = translateMarkdown(item.content.slice(0, index));
+                return item;
+            });
         },
         storeTags(state, action: PayloadAction<Tag[]>) {
-            state.tags = generateColor(action.payload);
+            state.tags = [...generateColor(action.payload)];
         },
         storeCategories(state, action: PayloadAction<Category[]>) {
-            state.categories = generateColor(action.payload);
+
+            state.categories = [...generateColor(action.payload)];
         }
     }
 });

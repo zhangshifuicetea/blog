@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../app/store';
-import {apiArticles, Article, ArticlesParam} from '../../../api/article';
+import {apiArticles, Article, ArticlesParam, newArticleParams} from '../../../api/article';
 import {fetchCategories, fetchTags} from '../../../features/article/articleSlice';
 import {SIDEBAR} from '../../../app/config';
 import {Divider, message, Tag} from 'antd';
@@ -21,7 +21,7 @@ export const SideBar = () => {
 
     useEffect(() => {
         const param: ArticlesParam = {
-            ...(new ArticlesParam()),
+            ...(newArticleParams()),
             order: 'viewCount DESC',
             page: 1,
             pageSize: 6,

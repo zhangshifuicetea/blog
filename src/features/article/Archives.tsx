@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../app/store';
-import {Article, ArticlesParam} from '../../api/article';
+import {Article, ArticlesParam, newArticleParams} from '../../api/article';
 import {ARCHIVES_PAGESIZE} from '../../app/config';
 import {fetchArticles} from './articleSlice';
 import {groupBy} from '../../utils';
 import {Pagination, Timeline} from 'antd';
 import {Link} from 'react-router-dom';
 import { ClockCircleOutlined } from '@ant-design/icons';
+import './archives.scss';
 
 export const Archives = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export const Archives = () => {
 
     function changePage(page: number) {
         document.querySelector('.app-main')!.scrollTop = 0;
-        const params: ArticlesParam = {...(new ArticlesParam()), page, pageSize: ARCHIVES_PAGESIZE};
+        const params: ArticlesParam = {...(newArticleParams()), page, pageSize: ARCHIVES_PAGESIZE};
         dispatch(fetchArticles(params));
     }
 
@@ -28,7 +29,7 @@ export const Archives = () => {
     });
 
     return (
-        <div className='app-archives'>
+        <div className='app-archives' style={{padding: 20}}>
                 <Timeline>
                     {list.map((d, i) => (
                         <React.Fragment key={i}>
